@@ -1,0 +1,40 @@
+{
+  "manifest_version": 2,
+  "name": "Fakeblok",
+  "description": "Fakeblok – Real journalists want you to stop sharing fake news on Facebook.",
+  "version": "1.3",
+  "icons" : {
+    "128" : "icon.png"
+  },
+  "browser_action": {
+    "default_icon": "icon.png"
+  },
+  "background": {
+    "scripts": ["vendor/js/jquery.min.js", "background.js"],
+    "persistent" : false
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "https://fakeblok.com/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches" :[
+        "*://mail.google.com/*",
+        "*://www.youtube.com/*"
+      ],
+      "js": [
+        "vendor/js/popup.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "web_accessible_resources": [
+    "vendor/js/popup.js"
+  ]
+}
